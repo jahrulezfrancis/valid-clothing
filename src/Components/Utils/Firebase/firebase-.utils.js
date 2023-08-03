@@ -1,9 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithPopup, signInWithRedirect, GoogleAuthProvider } from "firebase/auth"
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { doc,getDoc, setDoc, getFirestore } from "firebase/firestore"
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
     apiKey: "AIzaSyAA3I8cweVnjGxNGoBq-g8A2XllmRz5XHM",
     authDomain: "valid-clothing.firebaseapp.com",
@@ -24,4 +23,29 @@ Provider.setCustomParameters({
 
 
 export const auth = getAuth();
-export const SignInWithGooglePopup = () => signInWithPopup(auth, Provider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, Provider);
+
+export const db = getFirestore()
+
+export const createUserDocumentFromAuth = async (userAuth) => {
+    const userDocRef = doc(db, 'users', userAuth.uid);
+  
+    const userSnapshot = await getDoc(userDocRef);
+  
+    if (!userSnapshot.exists()) {
+      const { displayName, email } = userAuth;
+      const createdAt = new Date();
+  
+      try {
+        await setDoc(userDocRef, {
+          displayName,
+          email,
+          createdAt,
+        });
+      } catch (error) {
+        console.log('error creating the user', error.message);
+      }
+    }
+  
+    return userDocRef;
+  };

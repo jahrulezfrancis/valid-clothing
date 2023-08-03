@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Link, Outlet } from "react-router-dom";
-import "./navigation-bar.styles.css"
+import "./navigation-bar.styles.scss"
 import { ReactComponent as CrownLogo } from "../../../Assets/crown.svg"
 
 

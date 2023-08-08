@@ -1,3 +1,4 @@
+import Button from "../../Button/buttton.component";
 import SignUpForm from "../../Sign-up/sign-up-form.component";
 import { signInWithGooglePopup, createUserDocumentFromAuth } from "../../Utils/Firebase/firebase-.utils";
 
@@ -10,12 +11,7 @@ const Signin = () => {
 
     return (
         <div className="sign-in-container">
-            <button onClick={GoogleSignIn} style={{
-                padding: "7px", outline: 'none', cursor: "pointer",
-                borderRadius: "5px", border: '.1px solid grey'
-            }}>
-                Sign in with Popup
-            </button>
+            <Button onClick={GoogleSignIn} buttonType='google' children={'Sign in with Popup'} />
             <SignUpForm />
         </div>
     )

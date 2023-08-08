@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from "../Utils/Firebase/firebase-.utils";
+import Button from "../Button/buttton.component";
+import FormInput from "../Input/form-input.component";
 import "./sign-up-form.style.scss"
 
 const defaultFormFields = {
@@ -43,22 +45,19 @@ const SignUpForm = () => {
     }
 
     return (
-        <div className="group">
-            <h2>Sign up form</h2>
+        <div className="sign-up-form-container">
+            <h2>Don't have an account?</h2>
+            <span>Sign up with your email and password</span>
             <form onSubmit={handleSubmit}>
-                <label className="form-input-label" >Display Name</label>
-                <input className="form-input" name="displayName" type="text" onChange={handleChange} value={displayName} />
+                <FormInput label='Display Name' onChange={handleChange} required name="displayName" type="text" value={displayName} />
 
-                <label className="form-input-label" htmlFor="email">Email Address</label>
-                <input className="form-input" onChange={handleChange} name="email" type="email" value={email} />
+                <FormInput label='Email Address' onChange={handleChange} required name="email" type="email" value={email} />
 
-                <label className="form-input-label" htmlFor="password">Password</label>
-                <input className="form-input" onChange={handleChange} name="password" type="password" value={password} />
+                <FormInput label='Password' onChange={handleChange} required name="password" type="password" value={password} />
 
-                <label className="form-input-label" htmlFor="confirmPassword">Confirm Password</label>
-                <input className="form-input" onChange={handleChange} name="confirmPassword" type="password" value={confirmPassword} />
+                <FormInput label='Confirm Password' onChange={handleChange} required name="confirmPassword" type="password" value={confirmPassword} />
 
-                <button type='submit'>Sign Up</button>
+                <Button type='submit' buttonType='inverted' children="Sign Up" />
             </form>
         </div>
     )

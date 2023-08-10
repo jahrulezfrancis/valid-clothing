@@ -4,11 +4,14 @@ import "./navigation-bar.styles.scss"
 import { ReactComponent as CrownLogo } from "../../../Assets/crown.svg"
 import { UserContext } from "../../Context/user-context";
 import { signOutUser } from "../../Utils/Firebase/firebase-.utils";
+import CartIcon from "../../Cart-Icon/cart-icon.component";
+import CartDropDown from "../../Cart-dropDown/cart-drop-down.component";
+import { CartContext } from "../../Context/cart-context";
 
 
 const NavBar = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext);
-
+    const { isCartOpen } = useContext(CartContext)
     const handleLogout = async () => {
         await signOutUser()
         setCurrentUser(null)
@@ -24,15 +27,15 @@ const NavBar = () => {
                 </Link>
                 <div className="nav-links-container">
                     <Link className="nav-link" to="shop">Shop</Link>
-                    <Link className="nav-link" to="shop">Contact</Link>
                     {currentUser ? (
                         <Link className="nav-link" onClick={handleLogout}>Sign out</Link>
                     ) : (
                         <Link className="nav-link" to="auth">Sign in</Link>
                     )}
-                    <Link className="nav-link" to="shop">Cart</Link>
+                    <CartIcon />
                 </div>
             </div>
+            {isCartOpen && <CartDropDown />}
             <Outlet />
         </Fragment>
     )

@@ -12,7 +12,7 @@ export const addCartItem = (cartItems, productToAdd) => {
         return updatedCartItems;
     }
 
-    return [...cartItems, { ...productToAdd, quantity: null }];
+    return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
 export const CartContext = createContext({
@@ -33,8 +33,10 @@ export const CartProvider = ({ children }) => {
         setCartCount(newCartCount)
     }, [cartItems])
 
-    const addItemToCart = (products) =>
-        setCartItems(addCartItem(cartItems, products));
+    const addItemToCart = (product) => {
+        const updatedCartItems = addCartItem(cartItems, product);
+        setCartItems(updatedCartItems);
+    };
 
     const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart, cartCount };
 

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 
-export const addCartItem = (cartItems, productToAdd) => {
+const addCartItem = (cartItems, productToAdd) => {
     const existingCartItemIndex = cartItems.findIndex(
         (cartItem) => cartItem.id === productToAdd.id
     );
@@ -15,11 +15,54 @@ export const addCartItem = (cartItems, productToAdd) => {
     return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
+
+const removeFromCart = (cartItems, productToRemove) => {
+    const existingCartItemIndex = cartItems.findIndex(
+        (cartItem) => cartItem.id === productToRemove.id
+    );
+
+    if (existingCartItemIndex !== -1) {
+        const updatedCartItems = [...cartItems];
+
+        if (updatedCartItems[existingCartItemIndex].quantity === 1) {
+            updatedCartItems.splice(existingCartItemIndex, 1);
+        } else {
+            updatedCartItems[existingCartItemIndex].quantity -= 1;
+        }
+
+        return updatedCartItems;
+    }
+
+    return cartItems;
+};
+
+const clearFromCart = (cartItems, productToClear) => {
+    const existingCartItemIndex = cartItems.findIndex(
+        (cartItem) => cartItem.id === productToClear.id
+    );
+
+    if (existingCartItemIndex !== -1) {
+        const updatedCartItems = [...cartItems];
+
+        if (updatedCartItems[existingCartItemIndex].quantity === 1) {
+            updatedCartItems.splice(existingCartItemIndex, 1);
+        } else {
+            updatedCartItems[existingCartItemIndex].quantity = 1;
+        }
+
+        return updatedCartItems;
+    }
+}
+
+
+
 export const CartContext = createContext({
     isCartOpen: false,
     setIsOpen: () => { },
     cartItems: [],
     addItemToCart: () => { },
+    clearItemFromCart: () => { },
+    removeItemFromCart: () => { },
     cartCount: 0
 });
 
@@ -33,12 +76,22 @@ export const CartProvider = ({ children }) => {
         setCartCount(newCartCount)
     }, [cartItems])
 
-    const addItemToCart = (product) => {
-        const updatedCartItems = addCartItem(cartItems, product);
+    const addItemToCart = (productToAdd) => {
+        const updatedCartItems = addCartItem(cartItems, productToAdd);
         setCartItems(updatedCartItems);
     };
 
-    const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart, cartCount };
+    const removeItemFromCart = (productToRemove) => {
+        const updatedCartItems = removeFromCart(cartItems, productToRemove);
+        setCartItems(updatedCartItems);
+    };
+
+    const clearItemFromCart = (productToClear) => {
+        const updatedCartItems = clearFromCart(cartItems, productToClear);
+        setCartItems(updatedCartItems);
+    };
+
+    const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart, cartCount, removeItemFromCart, clearItemFromCart };
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

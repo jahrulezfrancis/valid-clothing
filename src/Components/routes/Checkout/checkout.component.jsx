@@ -5,7 +5,7 @@ import "./checkout.style.scss"
 
 
 const CheckoutPage = () => {
-    const { cartItems, addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext);
+    const { cartItems, totalPrice, addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext);
 
     return (
         <table className="cart-table">
@@ -22,7 +22,6 @@ const CheckoutPage = () => {
                 {cartItems.length > 0 ?
                     (cartItems.map((cartItem) => {
                         const { id, name, imageUrl, quantity, price } = cartItem;
-
                         return (
 
                             <tr key={id}>
@@ -30,9 +29,9 @@ const CheckoutPage = () => {
                                 <td>{name}</td>
                                 <td >
                                     <div className="btn-container">
-                                        <span onClick={() => removeItemFromCart(cartItem)} className="quantity-btn">{'<'}</span>
-                                        {quantity}
-                                        <span onClick={() => addItemToCart(cartItem)} className="quantity-btn">{'>'}</span>
+                                        <span onClick={() => removeItemFromCart(cartItem)} className="quantity-btn">&#10094;</span>
+                                        <span className="quantity">{quantity}</span>
+                                        <span onClick={() => addItemToCart(cartItem)} className="quantity-btn">&#10095;</span>
                                     </div>
                                 </td>
                                 <td>${price}</td>
@@ -42,32 +41,22 @@ const CheckoutPage = () => {
                             </tr>
                         )
                     })) :
-                    <td colSpan={5}>
-                        <div className="empty-cart-container">
-                            <EmptyCart width='200px' height='auto' />
-                            <h3>Your cart is empty, please go to shop page and add more products</h3>
-                        </div>
-                    </td>
+                    <tr>
+                        <td colSpan={5}>
+                            <div className="empty-cart-container">
+                                <EmptyCart width='200px' height='auto' />
+                                <h3>Your cart is empty, please go to shop page and add more products</h3>
+                            </div>
+                        </td>
+                    </tr>
                 }
+                <tr>
+                    <td rowSpan={2}>{`Total: $${totalPrice}`}</td>
+                </tr>
             </tbody>
-        </table>
 
 
-        // cartItems.map(({ name, imageUrl, quantity, price }) => {
-        //     return (
-
-        //         <div className="checkout-page-container">
-        //             <img src={imageUrl} alt={`${name}`} />
-        //             <div className='item-details'>
-        //                 <span className='name'>{name}</span>
-        //                 <span className='price'>
-        //                     {quantity} x ${price}
-        //                 </span>
-        //             </div>
-        //         </div>
-        //     )
-        // })
-
+        </table >
     )
 };
 export default CheckoutPage;

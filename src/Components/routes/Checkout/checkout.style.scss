@@ -23,18 +23,24 @@
     justify-content: center;
   }
 
-  .quantity-btn {
-    cursor: pointer;
-    font-size: 25px;
-    margin: auto 0px auto 0px;
-    padding: 3px;
-  }
-
   .btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+
+    .quantity-btn {
+      cursor: pointer;
+      width: 25px;
+      margin: auto 0px auto 0px;
+      padding: 3px;
+
+      .quantity {
+        display: flex;
+        margin: 0px 10px;
+      }
+    }
+
   }
 
 

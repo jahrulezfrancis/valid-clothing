@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CatogoryContext } from "../../Context/category-context";
 import ProductsCard from "../../Product-Card/product-card.compnonent";
@@ -15,9 +15,12 @@ const Category = () => {
     }, [category, categoriesMap])
 
     return (
-        <div className="dynamic-category-container">
-            {products && products.map((product) => <ProductsCard key={product.id} products={product} />)}
-        </div>
+        <Fragment>
+            <h2 className="category-title">{category}</h2>
+            <div className="category-container">
+                {products && products.map((product) => <ProductsCard key={product.id} products={product} />)}
+            </div>
+        </Fragment>
     )
 }
 

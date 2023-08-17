@@ -10,7 +10,6 @@ const ProductsCard = ({ products }) => {
 
 
     const addProducts = useCallback(() => {
-        console.log('Adding product to cart:', products);
         addItemToCart(products);
     }, [addItemToCart, products]);
 

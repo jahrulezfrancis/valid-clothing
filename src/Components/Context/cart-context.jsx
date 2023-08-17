@@ -4,7 +4,6 @@ const addCartItem = (cartItems, productToAdd) => {
     const existingCartItemIndex = cartItems.findIndex(
         (cartItem) => cartItem.id === productToAdd.id
     );
-    console.log(cartItems);
 
     if (existingCartItemIndex !== -1) {
         const updatedCartItems = [...cartItems];
@@ -84,7 +83,7 @@ export const CartProvider = ({ children }) => {
         setCartItems(updatedCartItems);
     };
 
-    const value = { isCartOpen, setIsCartOpen, cartItems,totalPrice, addItemToCart, cartCount, removeItemFromCart, clearItemFromCart };
+    const value = { isCartOpen, setIsCartOpen, cartItems, totalPrice, addItemToCart, cartCount, removeItemFromCart, clearItemFromCart };
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

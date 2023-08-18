@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const DirectoriesContainer = styled.div`
- width: 100%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -12,6 +12,7 @@ export const BackgroundImageContainer = styled.div`
     height: 100%;
     background-size: cover;
     background-position: center;
+    background-image: ${({imageUrl}) => `url(${imageUrl})`}
 `
 
 export const Body = styled.div`

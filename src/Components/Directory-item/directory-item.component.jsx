@@ -8,7 +8,7 @@ const DirectoryItem = ({ categoryList }) => {
             {categoryList.map(({ title, id, imageUrl }) => {
                 return (
                     <DirectoryItemContainer key={id}>
-                        <BackgroundImageContainer style={{ backgroundImage: `url(${imageUrl})` }} />
+                        <BackgroundImageContainer imageUrl={imageUrl} />
                         <Body>
                             <Link to={`/shop/${title}`}>
                                 <h2>{title}</h2>

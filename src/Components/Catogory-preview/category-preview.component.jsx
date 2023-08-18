@@ -8,7 +8,7 @@ const CategoryPreview = ({ title, products }) => {
                 <TitleContainer to={title}>{title.toUpperCase()}</TitleContainer>
             </h2>
             <PreviewContainer>
-                {products.filter((_, idx) => idx < 4).map((product) => <ProductsCard products={product} />)}
+                {products.filter((_, idx) => idx < 4).map((product) => <ProductsCard key={product.id} products={product} />)}
             </PreviewContainer>
         </CategoryPreviewContainer>
     )

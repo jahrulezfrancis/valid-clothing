@@ -1,25 +1,25 @@
-import "./directory-item.styles.scss"
+import { DirectoriesContainer, Body, DirectoryItemContainer, BackgroundImageContainer } from "./directory-item.styles"
 import { Link } from "react-router-dom"
 
 
 const DirectoryItem = ({ categoryList }) => {
     return (
-        <div className="directories-container">
+        <DirectoriesContainer>
             {categoryList.map(({ title, id, imageUrl }) => {
                 return (
-                    <div key={id} className="directory-item-container">
-                        <div className="background-image" style={{ backgroundImage: `url(${imageUrl})` }} />
-                        <div className="directory-item-body">
+                    <DirectoryItemContainer key={id}>
+                        <BackgroundImageContainer style={{ backgroundImage: `url(${imageUrl})` }} />
+                        <Body>
                             <Link to={`/shop/${title}`}>
                                 <h2>{title}</h2>
                                 <p>Shop Now</p>
                             </Link>
-                        </div>
-                    </div>)
+                        </Body>
+                    </DirectoryItemContainer>)
             })}
 
 
-        </div>
+        </DirectoriesContainer>
     )
 }
 

@@ -1,21 +1,21 @@
 import { useContext } from "react";
 import { CartContext } from "../../Context/cart-context";
 import { ReactComponent as EmptyCart } from "../../../Assets/empty-shopping-cart.svg"
-import "./checkout.style.scss"
+import { CartTable, TableData, RemoveButton, ButtonContainer, EmptyCartContainer, QuantityButton, TableHead, QuantityLabel } from "./checkout.style"
 
 
 const CheckoutPage = () => {
     const { cartItems, totalPrice, addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext);
 
     return (
-        <table className="cart-table">
+        <CartTable>
             <thead>
                 <tr>
-                    <th>Products</th>
-                    <th>Description</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Remove</th>
+                    <TableHead>Products</TableHead>
+                    <TableHead>Description</TableHead>
+                    <TableHead>Quantity</TableHead>
+                    <TableHead>Price</TableHead>
+                    <TableHead>Remove</TableHead>
                 </tr>
             </thead>
             <tbody>
@@ -25,38 +25,36 @@ const CheckoutPage = () => {
                         return (
 
                             <tr key={id}>
-                                <td><img width='150px' src={imageUrl} alt={`${name}`} /></td>
-                                <td>{name}</td>
-                                <td >
-                                    <div className="btn-container">
-                                        <span onClick={() => removeItemFromCart(cartItem)} className="quantity-btn">&#10094;</span>
-                                        <span className="quantity">{quantity}</span>
-                                        <span onClick={() => addItemToCart(cartItem)} className="quantity-btn">&#10095;</span>
-                                    </div>
-                                </td>
-                                <td>${price}</td>
-                                <td>
-                                    <button onClick={() => clearItemFromCart(cartItem)}>X</button>
-                                </td>
+                                <TableData><img width='150px' src={imageUrl} alt={`${name}`} /></TableData>
+                                <TableData>{name}</TableData>
+                                <TableData >
+                                    <ButtonContainer>
+                                        <QuantityButton onClick={() => removeItemFromCart(cartItem)}>&#10094;</QuantityButton>
+                                        <QuantityLabel>{quantity}</QuantityLabel>
+                                        <QuantityButton onClick={() => addItemToCart(cartItem)}>&#10095;</QuantityButton>
+                                    </ButtonContainer>
+                                </TableData>
+                                <TableData>${price}</TableData>
+                                <TableData>
+                                    <RemoveButton onClick={() => clearItemFromCart(cartItem)}>X</RemoveButton>
+                                </TableData>
                             </tr>
                         )
                     })) :
                     <tr>
-                        <td colSpan={5}>
-                            <div className="empty-cart-container">
+                        <TableData colSpan={5}>
+                            <EmptyCartContainer>
                                 <EmptyCart width='200px' height='auto' />
                                 <h3>Your cart is empty, please go to shop page and add more products</h3>
-                            </div>
-                        </td>
+                            </EmptyCartContainer>
+                        </TableData>
                     </tr>
                 }
-                <tr>
-                    <td rowSpan={2}>{`Total: $${totalPrice}`}</td>
-                </tr>
+                {cartItems.length > 0 && <tr><TableData rowSpan={2}>{`Total: $${totalPrice}`}</TableData></tr>}
             </tbody>
 
 
-        </table >
+        </CartTable >
     )
 };
 export default CheckoutPage;

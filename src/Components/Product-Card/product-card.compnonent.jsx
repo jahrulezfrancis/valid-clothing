@@ -1,6 +1,6 @@
 import { useContext, useCallback } from "react";
 import Button, { Button_Types } from "../Button/buttton.component";
-import "./product-card.scss"
+import {Container, NameContainer, PriceContainer, FooterContainer} from "./product-card"
 import { CartContext } from "../Context/cart-context";
 
 const ProductsCard = ({ products }) => {
@@ -14,14 +14,14 @@ const ProductsCard = ({ products }) => {
     }, [addItemToCart, products]);
 
     return (
-        <div className="products-card-container">
+        <Container>
             <img src={imageUrl} alt={`${name}`} />
-            <div className="footer">
-                <span className="name">{name}</span>
-                <span className="price">{price}</span>
-            </div>
+            <FooterContainer>
+                <NameContainer>{name}</NameContainer>
+                <PriceContainer>{price}</PriceContainer>
+            </FooterContainer>
             <Button onClick={addProducts} buttonType={Button_Types.inverted}>Add to Cart</Button>
-        </div>
+        </Container>
     )
 }
 

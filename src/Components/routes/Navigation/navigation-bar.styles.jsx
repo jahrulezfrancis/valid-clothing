@@ -12,8 +12,11 @@ export const NavContainer = styled.div`
 
 
 export const LogoContainer = styled(Link)`
+display: flex;
+align-items: center;
+gap: 10px;
     height: 100%;
-    width: 70px;
+    width: auto;
     padding: 25px;
     `
 

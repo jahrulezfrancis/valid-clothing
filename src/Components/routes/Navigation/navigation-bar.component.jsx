@@ -1,7 +1,8 @@
 import { Fragment, useContext } from "react";
 import { Outlet } from "react-router-dom";
 import { NavContainer, LogoContainer, LinksContainer, Navlink } from "./navigation-bar.styles"
-import { ReactComponent as CrownLogo } from "../../../Assets/crown.svg"
+// import { ReactComponent as CrownLogo } from "../../../Assets/crown.svg"
+import { ReactComponent as ValidLogo } from "../../../Assets/Shopping-u-draw.svg"
 import { UserContext } from "../../Context/user-context";
 import { signOutUser } from "../../Utils/Firebase/firebase-.utils";
 import CartIcon from "../../Cart-Icon/cart-icon.component";
@@ -21,7 +22,9 @@ const NavBar = () => {
         <Fragment>
             <NavContainer>
                 <LogoContainer to='/'>
-                    <CrownLogo />
+                    {/* <CrownLogo /> */}
+                    <ValidLogo width={"70px"} />
+                    <h2>Valid Clothing</h2>
                 </LogoContainer>
                 <LinksContainer>
                     <Navlink to="shop">Shop</Navlink>

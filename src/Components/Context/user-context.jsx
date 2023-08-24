@@ -7,6 +7,26 @@ export const UserContext = createContext({
     setCurrentUser: () => null
 })
 
+const UserActionTypes = {
+
+    setCurrentUser: 'SetCurrentUser'
+}
+
+const UserReducer = (state, action) => {
+    const { payload, type } = action;
+
+    switch (type) {
+        case UserActionTypes.setCurrentUser:
+            return {
+                ...state,
+                currentUser: payload
+            }
+        default:
+            throw new Error(`Unhandled type ${type} in userReducer`)
+    }
+
+}
+
 export const UserProvider = ({ children }) => {
 
     const [currentUser, setCurrentUser] = useState(null)

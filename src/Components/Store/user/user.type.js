@@ -1,3 +1,3 @@
 export const UserActionTypes = {
-    setCurrentUser: 'SetCurrentUser'
+    setCurrentUser: 'user/SetCurrentUser'
 }

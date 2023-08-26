@@ -1,3 +1,3 @@
 export const CategoriesActionTypes = {
-    SetCategoriesMap: "category/SetCategoriesMap"
+    SetCategories: "category/SetCategoriesMap"
 }

@@ -1,10 +1,10 @@
 import CategoryPreview from "../../Catogory-preview/category-preview.component";
-import { CategoriesMapSelector } from "../../Store/Categories/categories.selector";
+import { CategoriesSelector } from "../../Store/Categories/categories.selector";
 import { useSelector } from "react-redux";
 
 const CategoriesPreview = () => {
 
-    const categoriesMap = useSelector(CategoriesMapSelector)
+    const categoriesMap = useSelector(CategoriesSelector)
 
     return (
         <div className="shop-container">

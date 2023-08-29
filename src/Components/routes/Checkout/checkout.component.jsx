@@ -1,11 +1,14 @@
-import { useContext } from "react";
-import { CartContext } from "../../Context/cart-context";
 import { ReactComponent as EmptyCart } from "../../../Assets/empty-shopping-cart.svg"
+import { addItemToCart, removeItemFromCart, clearItemFromCart, } from "../../Store/Cart/cart.slice";
 import { CartTable, TableData, RemoveButton, ButtonContainer, EmptyCartContainer, QuantityButton, TableHead, QuantityLabel } from "./checkout.style"
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems, selectCartTotal } from "../../Store/Cart/cart.selector";
 
 
 const CheckoutPage = () => {
-    const { cartItems, totalPrice, addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext);
+    const dispatch = useDispatch()
+    const cartItems = useSelector(selectCartItems)
+    const totalPrice = useSelector(selectCartTotal)
 
     return (
         <CartTable>
@@ -29,14 +32,14 @@ const CheckoutPage = () => {
                                 <TableData>{name}</TableData>
                                 <TableData >
                                     <ButtonContainer>
-                                        <QuantityButton onClick={() => removeItemFromCart(cartItem)}>&#10094;</QuantityButton>
+                                        <QuantityButton onClick={() => dispatch(removeItemFromCart(cartItem))}>&#10094;</QuantityButton>
                                         <QuantityLabel>{quantity}</QuantityLabel>
-                                        <QuantityButton onClick={() => addItemToCart(cartItem)}>&#10095;</QuantityButton>
+                                        <QuantityButton onClick={() => dispatch(addItemToCart(cartItem))}>&#10095;</QuantityButton>
                                     </ButtonContainer>
                                 </TableData>
                                 <TableData>${price}</TableData>
                                 <TableData>
-                                    <RemoveButton onClick={() => clearItemFromCart(cartItem)}>X</RemoveButton>
+                                    <RemoveButton onClick={() => dispatch(clearItemFromCart(cartItem))}>X</RemoveButton>
                                 </TableData>
                             </tr>
                         )

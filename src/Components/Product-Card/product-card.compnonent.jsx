@@ -1,17 +1,15 @@
-import { useContext, useCallback } from "react";
 import Button, { Button_Types } from "../Button/buttton.component";
-import {Container, NameContainer, PriceContainer, FooterContainer} from "./product-card"
-import { CartContext } from "../Context/cart-context";
+import { Container, NameContainer, PriceContainer, FooterContainer } from "./product-card"
+import { addItemToCart } from "../Store/Cart/cart.slice";
+import { useDispatch } from "react-redux";
 
 const ProductsCard = ({ products }) => {
     const { name, imageUrl, price } = products;
-    const { addItemToCart } = useContext(CartContext)
+    const dispatch = useDispatch()
 
 
+    const addProducts = () => dispatch(addItemToCart(products));
 
-    const addProducts = useCallback(() => {
-        addItemToCart(products);
-    }, [addItemToCart, products]);
 
     return (
         <Container>

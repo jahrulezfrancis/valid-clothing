@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from "react";
 import { createUserDocumentFromAuth, onAuthStateChangedListener } from "./Components/Utils/Firebase/firebase.utils";
-import { setCurrentUser } from './Components/Store/user/user.action';
+import { setCurrentUser } from './Components/Store/user/user-slice';
 
 import Home from "./Components/routes/Home/Home.component";
 import NavBar from './Components/routes/Navigation/navigation-bar.component';

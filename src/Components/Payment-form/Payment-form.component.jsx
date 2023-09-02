@@ -52,7 +52,7 @@ const PaymentForm = () => {
             showToast(`An error occured, ${PaymentResult.error.message} please try again`, 'error')
         } else {
             if (PaymentResult.paymentIntent.status === 'succeeded') {
-                showToast(`Your payment of $${amount} was successful, thank you for your patronage`, 'success')
+                showToast(`Your payment of $${amount} was successful, you will receive a mail shortly`, 'success')
                 setTimeout(() => {
                     dispatch(emptyCart([]))
                 }, 3000)

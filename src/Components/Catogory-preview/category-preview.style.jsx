@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 
 export const CategoryPreviewContainer = styled.div`
-  display: flex;
+  // display: flex;
   flex-direction: column;
   margin-bottom: 30px;
 `
@@ -17,7 +17,7 @@ export const TitleContainer = styled(Link)`
 
 export const PreviewContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); // Responsive grid
   column-gap: 20px;
-
-`
+  row-gap: 20px;
+`;

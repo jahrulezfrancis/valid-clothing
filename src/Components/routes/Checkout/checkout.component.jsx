@@ -1,6 +1,6 @@
 import { ReactComponent as EmptyCart } from "../../../Assets/empty-shopping-cart.svg"
 import { addItemToCart, removeItemFromCart, clearItemFromCart, } from "../../Store/Cart/cart.slice";
-import { CartTable, TableData, RemoveButton, ButtonContainer, EmptyCartContainer, QuantityButton, TableHead, QuantityLabel } from "./checkout.style"
+import { CartTable, TableData, RemoveButton, ButtonContainer, EmptyCartContainer, QuantityButton, TableHead, QuantityLabel, TableContainer } from "./checkout.style"
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems, selectCartTotal } from "../../Store/Cart/cart.selector";
 import PaymentForm from "../../Payment-form/Payment-form.component";
@@ -12,7 +12,8 @@ const CheckoutPage = () => {
     const totalPrice = useSelector(selectCartTotal)
 
     return (
-        <div>
+        <>
+        <TableContainer>
             <CartTable>
                 <thead>
                     <tr>
@@ -59,8 +60,9 @@ const CheckoutPage = () => {
                 </tbody>
 
             </CartTable >
+        </TableContainer>
             {cartItems.length > 0 && <PaymentForm />}
-        </div>
+        </>
     )
 };
 export default CheckoutPage;

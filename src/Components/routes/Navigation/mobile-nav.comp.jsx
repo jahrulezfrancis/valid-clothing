@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { ReactComponent as ValidLogo } from "../../../Assets/Shopping-u-draw.svg"
 import CartIcon from "../../Cart-Icon/cart-icon.component";
 import { signOutUser } from "../../Utils/Firebase/firebase.utils";

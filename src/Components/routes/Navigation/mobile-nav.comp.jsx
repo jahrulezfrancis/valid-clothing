@@ -1,95 +1,40 @@
-import React, { useState } from "react";
-import { ReactComponent as ValidLogo } from "../../../Assets/Shopping-u-draw.svg"
+import { Navlink } from "./navigation-bar.styles";
+import { Menu, MenuItem, MenuDivider } from '@szhsin/react-menu';
+import '@szhsin/react-menu/dist/index.css';
+import '@szhsin/react-menu/dist/transitions/slide.css';
 import CartIcon from "../../Cart-Icon/cart-icon.component";
-import { signOutUser } from "../../Utils/Firebase/firebase.utils";
-import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../Store/user/userSelector";
-import { selectIsCartOpen } from "../../Store/Cart/cart.selector";
-import CartDropDown from "../../Cart-dropDown/cart-drop-down.component";
-import { NavContainer, LogoContainer, LinksContainer, Navlink, Container } from "./navigation-bar.styles";
-import styled from "styled-components";
-
-const MobileMenuContainer = styled.div`
-  display: none; /* Initially hide the menu on larger screens */
-  
-  @media (max-width: 768px) {
-    /* Display the menu on screens with a max-width of 768px (typical mobile devices) */
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #ffffff; /* Background color for the mobile menu */
-    z-index: 1000; /* Adjust the z-index as needed to ensure it's above other content */
-  }
-`;
-
-const MobileMenuItem = styled.div`
-  padding: 20px;
-  text-align: center;
-  font-size: 18px;
-  border-bottom: 1px solid #ccc; /* Add a separator between menu items */
-  color: #000000; /* Text color for menu items */
-
-  &:last-child {
-    border-bottom: none; /* Remove the separator for the last menu item */
-  }
-`;
-
-const MobileMenu = () => {
-    return (
-        <MobileMenuContainer>
-            <MobileMenuItem>Item 1</MobileMenuItem>
-            <MobileMenuItem>Item 2</MobileMenuItem>
-            <MobileMenuItem>Item 3</MobileMenuItem>
-            <MobileMenuItem>Item 4</MobileMenuItem>
-        </MobileMenuContainer>
-    );
-};
+import { signOutUser } from "../../Utils/Firebase/firebase.utils";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 
 
-
-const MobileNavMenu = () => {
-    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+const HamburgerMenu = () => {
     const currentUser = useSelector(selectCurrentUser);
-    const isCartOpen = useSelector(selectIsCartOpen)
+
+    const isSmallDevice = useMediaQuery("only screen and (min-width : 370px)");
+
 
     return (
-        <Container>
-            <MobileMenuContainer>
-                <MobileMenuItem>Item 1</MobileMenuItem>
-                <MobileMenuItem>Item 2</MobileMenuItem>
-                <MobileMenuItem>Item 3</MobileMenuItem>
-                <MobileMenuItem>Item 4</MobileMenuItem>
-            </MobileMenuContainer>
-            <NavContainer>
-                <LogoContainer to="/">
-                    <ValidLogo width={"70px"} />
-                    <h2>Valid Clothing</h2>
-                </LogoContainer>
-                <div onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}>
-                    {/* Display a mobile menu icon here */}
-                    <MobileMenu />
-                </div>
-            </NavContainer>
-            {isMobileMenuOpen && (
-                <LinksContainer>
-                    <Navlink to="shop">Shop</Navlink>
+        <div style={{ display: "flex", alignItems: 'center', justifyContent: 'space-between' }}>
+            <Menu menuStyle={{ display: 'flex', padding: '10px 0px 20px 10px' }} menuButton={<button style={{ padding: '10px', margin: '10px 0px 20px 10px' }} type="button">Menu</button>}>
+                <MenuItem><Navlink to='/'>Home</Navlink></MenuItem>
+                <MenuDivider />
+                <MenuItem><Navlink to='/shop'>Shop</Navlink></MenuItem>
+                <MenuDivider />
+                <MenuItem>
                     {currentUser ? (
                         <Navlink onClick={signOutUser}>Sign out</Navlink>
                     ) : (
                         <Navlink to="auth">Sign in</Navlink>
                     )}
-                    <CartIcon />
-                </LinksContainer>
-            )}
-            {isCartOpen && <CartDropDown />}
-            <Outlet />
-        </Container>
+                </MenuItem>
+            </Menu>
+            {isSmallDevice && <h2>Valid Clothing</h2>}
+            <CartIcon />
+        </div>
     );
 };
 
-export default MobileNavMenu;
+export default HamburgerMenu;

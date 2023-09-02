@@ -51,10 +51,3 @@ export const Navlink = styled(Link)`
     padding: 10px;
   }
 `;
-
-export const BigNavContainer = styled.div`
-  display: block;
-    @media (max-width: 700px){
-  display: none;
-}
-`

@@ -1,5 +1,4 @@
-import Button, { Button_Types } from "../Button/buttton.component";
-import { Container, NameContainer, PriceContainer, FooterContainer,BottomElements } from "./product-card"
+import { Container,FooterContainer, BottomElements, CardButton } from "./product-card"
 import { addItemToCart } from "../Store/Cart/cart.slice";
 import { useDispatch } from "react-redux";
 
@@ -15,13 +14,12 @@ const ProductsCard = ({ products }) => {
         <Container>
             <img src={imageUrl} alt={`${name}`} />
             <FooterContainer>
-                <NameContainer>Product: {name}</NameContainer>
+                <span>Product: {name}</span>
                 <BottomElements>
-                    <PriceContainer> ${price}</PriceContainer>
-                    Add to cart
+                    <span> ${price}</span>
+                    <CardButton onClick={addProducts}>Add to cart</CardButton>
                 </BottomElements>
             </FooterContainer>
-            <Button onClick={addProducts} buttonType={Button_Types.inverted}>Add to Cart</Button>
         </Container>
     )
 }

@@ -1,12 +1,15 @@
-import { Navlink } from "./navigation-bar.styles";
-import { Menu, MenuItem, MenuDivider } from '@szhsin/react-menu';
+import { useSelector } from "react-redux";
 import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
+import { useMediaQuery } from "@uidotdev/usehooks";
+import { styled } from "styled-components";
+
+import { Navlink } from "./navigation-bar.styles";
+import { Menu, MenuItem, MenuDivider } from '@szhsin/react-menu';
 import CartIcon from "../../Cart-Icon/cart-icon.component";
-import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../Store/user/userSelector";
 import { signOutUser } from "../../Utils/Firebase/firebase.utils";
-import { useMediaQuery } from "@uidotdev/usehooks";
+import { FiMenu } from "react-icons/fi";
 
 
 
@@ -17,8 +20,10 @@ const HamburgerMenu = () => {
 
 
     return (
-        <div style={{ display: "flex", alignItems: 'center', justifyContent: 'space-between' }}>
-            <Menu menuStyle={{ display: 'flex', padding: '10px 0px 20px 10px' }} menuButton={<button style={{ padding: '10px', margin: '10px 0px 20px 10px' }} type="button">Menu</button>}>
+        <Wrapper>
+            <Menu menuStyle={{ display: 'flex', padding: '10px 0px 20px 10px' }} menuButton={
+                <button style={{ outline: 'none',background: 'none', border: 'none', paddingTop: '10px', fontSize: '30px' }}><FiMenu /></button>
+            }>
                 <MenuItem><Navlink to='/'>Home</Navlink></MenuItem>
                 <MenuDivider />
                 <MenuItem><Navlink to='/shop'>Shop</Navlink></MenuItem>
@@ -33,8 +38,16 @@ const HamburgerMenu = () => {
             </Menu>
             {isSmallDevice && <h2>Valid Clothing</h2>}
             <CartIcon />
-        </div>
+        </Wrapper>
     );
 };
 
 export default HamburgerMenu;
+
+
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px
+`

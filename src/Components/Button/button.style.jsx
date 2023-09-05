@@ -11,8 +11,6 @@ export const BaseButton = styled.button`
     font-size: 15px;
     background-color: black;
     color: white;
-    text-transform: uppercase;
-    font-family: 'Open Sans Condensed';
     font-weight: bolder;
     border: none;
     cursor: pointer;
@@ -22,12 +20,12 @@ export const BaseButton = styled.button`
     align-items: center;
 
     &:hover {
-        background-color: white;
-        color: black;
-        border-radius: 7px;
-        box-shadow: -2px 4px 16px -2px rgba(75, 146, 230, 0.72);
-        -webkit-box-shadow: -2px 4px 16px - 2px rgba(51, 132, 232, 0.72);
-        -moz-box-shadow: -2px 4px 16px - 2px rgba(75, 146, 230, 0.72);
+      background-color: white;
+      color: black;
+      border-radius: 7px;
+      box-shadow: -2px 4px 16px -2px rgba(75, 146, 230, 0.72);
+      -webkit-box-shadow: -2px 4px 16px - 2px rgba(51, 132, 232, 0.72);
+      -moz-box-shadow: -2px 4px 16px - 2px rgba(75, 146, 230, 0.72);
     }
 `
 

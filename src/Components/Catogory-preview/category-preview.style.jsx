@@ -18,15 +18,22 @@ export const TitleContainer = styled(Link)`
 export const PreviewContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  column-gap: 20px;
+  gap: 20px;
+
 
     @media (max-width: 900px) and (min-width: 550px){
-       grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+
     }
     @media (max-width: 700px) and (min-width: 550px){
       grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+
    }
     @media (max-width: 550px){
-     grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: repeat(1, 1fr);
+      gap: 20px;
+
   }
 `;

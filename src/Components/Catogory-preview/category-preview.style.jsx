@@ -20,20 +20,15 @@ export const PreviewContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 
-
-    @media (max-width: 900px) and (min-width: 550px){
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+    @media (max-width: 1200px){
+    grid-template-columns: repeat(3, 1fr);
 
     }
-    @media (max-width: 700px) and (min-width: 550px){
+    @media (max-width: 900px) and (min-width: 550px){
       grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
 
-   }
-    @media (max-width: 550px){
+    }
+    @media (max-width: 610px){
       grid-template-columns: repeat(1, 1fr);
-      gap: 20px;
-
   }
 `;

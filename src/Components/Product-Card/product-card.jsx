@@ -5,13 +5,18 @@ export const Container = styled.div`
    width: 100%;
     display: flex;
     flex-direction: column;
-    height: 350px;
+    height: auto;
     align-items: center;
     position: relative;
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: -1px 2px 14px 4px rgba(185,185,185,0.75);
+    -webkit-box-shadow: -1px 2px 14px 4px rgba(185,185,185,0.75);
+    -moz-box-shadow: -1px 2px 14px 4px rgba(185,185,185,0.75);
   
     img {
       width: 100%;
-      height: 95%;
+      height: 85%;
       object-fit: cover;
       margin-bottom: 5px;
     }
@@ -37,9 +42,10 @@ export const Container = styled.div`
 `
 
 export const FooterContainer = styled.div`
-   width: 100%;
-      height: 5%;
+      width: 100%;
+      height: 30px;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
       font-size: 18px;
   }
@@ -52,4 +58,9 @@ export const NameContainer = styled.span`
 
 export const PriceContainer = styled.span`
  width: 10%;
+ `
+
+ export const BottomElements = styled.div`
+ display: flex;
+ justify-content: space-between;
  `

@@ -10,6 +10,7 @@ import CartIcon from "../../Cart-Icon/cart-icon.component";
 import { selectCurrentUser } from "../../Store/user/userSelector";
 import { signOutUser } from "../../Utils/Firebase/firebase.utils";
 import { FiMenu } from "react-icons/fi";
+import {MdMenuOpen} from "react-icons/md"
 
 
 
@@ -21,9 +22,7 @@ const HamburgerMenu = () => {
 
     return (
         <Wrapper>
-            <Menu menuStyle={{ display: 'flex', padding: '10px 0px 20px 10px' }} menuButton={
-                <button style={{ outline: 'none',background: 'none', border: 'none', paddingTop: '10px', fontSize: '30px' }}><FiMenu /></button>
-            }>
+            <Menu menuButton={({ open }) => <ButtonContainer>{open ? <MdMenuOpen/> : <FiMenu />}</ButtonContainer> }>
                 <MenuItem><Navlink to='/'>Home</Navlink></MenuItem>
                 <MenuDivider />
                 <MenuItem><Navlink to='/shop'>Shop</Navlink></MenuItem>
@@ -50,4 +49,12 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0px 20px
+`
+
+const ButtonContainer = styled.button`
+    outline: none;
+    background: none;
+    border: none;
+    padding-top: 10px; 
+    font-size: 35px;
 `

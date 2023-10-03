@@ -5,7 +5,7 @@ const InitialState = {
 }
 
 export const userSlice = createSlice({
-    name: 'cart',
+    name: 'user',
     initialState: InitialState,
     reducers: {
         setCurrentUser(state, action) {

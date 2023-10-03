@@ -63,15 +63,15 @@ const PaymentForm = () => {
     return (
         <>
             <TopPaymentFormContainer>
-                <p><span style={{ color: 'red' }}>Please note:</span> This Payment is in test mode and no actual card is required. Just type in 4242 4x as your card number, expiry date should be a future date while cvc and zip code can be any number</p>
                 <Toast />
                 <PaymentFormContainer onSubmit={handlePayment}>
-                    <PaymentHeader>Credit card payment:</PaymentHeader>
+                    <PaymentHeader>Checkout with Stripe using Credit card:</PaymentHeader>
                     <StyledCardElement />
                     <PaymentButton isLoading={processingPayment} buttonType={Button_Types.inverted}>
                         Pay Now
                     </PaymentButton>
                 </PaymentFormContainer>
+                <p style={{ width: 400 }}><span style={{ color: 'red' }}>Please note:</span> This Payment is in test mode and no actual card is required. Just type in 4242 4x as your card number, expiry date should be a future date while cvc and zip code can be any number</p>
             </TopPaymentFormContainer>
         </>
 

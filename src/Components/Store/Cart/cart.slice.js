@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { showToast } from '../../Toast/Toast.container';
 
 
 
@@ -55,6 +56,7 @@ export const cartSlice = createSlice({
     },
     addItemToCart(state, action) {
       state.cartItems = addCartItem(state.cartItems, action.payload);
+      showToast('Item was added to cart successfully', 'success')
     },
     removeItemFromCart(state, action) {
       state.cartItems = removeCartItem(state.cartItems, action.payload);
@@ -62,7 +64,7 @@ export const cartSlice = createSlice({
     clearItemFromCart(state, action) {
       state.cartItems = clearCartItem(state.cartItems, action.payload)
     },
-    emptyCart(state, action){
+    emptyCart(state, action) {
       state.cartItems = action.payload
     }
   }

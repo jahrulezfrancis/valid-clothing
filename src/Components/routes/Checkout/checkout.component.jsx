@@ -4,7 +4,7 @@ import { CartTable, TableData, RemoveButton, ButtonContainer, EmptyCartContainer
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems, selectCartTotal } from "../../Store/Cart/cart.selector";
 import PaymentForm from "../../Payment-form/Payment-form.component";
-import PayStackPaymentHandler from "../../Payment/PaymentConfig";
+import PayStackPaymentHandler from "../../Payment/PaystackPaymentConfig";
 import { selectCurrentUser } from "../../Store/user/userSelector";
 
 
@@ -67,10 +67,10 @@ const CheckoutPage = () => {
             </TableContainer>
             {cartItems.length > 0 &&
                 <div style={{ textAlign: "center" }}>
-                    {/* <h4>We have two payment methods, Choose the one that is best for you: </h4> */}
+                    <h4>We have two payment methods, Choose the one that is best for you: </h4>
                     <PayStackPaymentHandler email={currentUser.email} amount={totalPrice} />
-                    {/* or */}
-                    {/* <PaymentForm /> */}
+                    or
+                    <PaymentForm />
                 </div>}
         </>
     )

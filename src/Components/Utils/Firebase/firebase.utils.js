@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signOut, signInWithPopup, signInWithRedirect, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth"
-import { doc, getDoc, setDoc, getFirestore, writeBatch, collection, query, getDocs } from "firebase/firestore"
+import { doc, getDoc, setDoc, getFirestore, writeBatch, collection, query, getDocs, addDoc } from "firebase/firestore"
 
 
 const firebaseConfig = {
@@ -85,3 +85,76 @@ export const signOutUser = async () => await signOut(auth)
 export const onAuthStateChangedListener = (callBack) => {
   onAuthStateChanged(auth, callBack)
 }
+
+
+//Methods to handle and or manage transaction history from database
+
+const transactionRef = collection(db, 'transactions')
+
+
+
+// Function to upload Flutterwave transaction data to Firestore
+export const addNewTransactionHistory = async ({flutterwaveData}) => {
+  try {
+
+    const {
+      amount,
+      customer: { email, name },
+      tx_ref,
+      status,
+      flw_ref,
+    } = flutterwaveData;
+
+    // Create an object with the extracted data
+    const transactionData = {
+      amount,
+      email,
+      name,
+      created_at: new Date(), 
+      transaction_id: flw_ref, 
+      status,
+      tx_ref,
+    };
+
+    // Add the transaction data to Firestore
+    await addDoc(transactionRef, transactionData);
+
+    console.log('Flutterwave transaction data uploaded to Firestore successfully');
+  } catch (error) {
+    console.error('Error uploading Flutterwave transaction data to Firestore:', error);
+  }
+};
+
+
+// Function to retrieve transaction history for a specific user from Firestore
+export const fetchTransactionHistory = async (userId) => {
+  try {
+    // Get a reference to the Firestore user document
+    const userDocRef = doc(db, 'users', userId);
+
+    // Create a reference to the 'transactions' subcollection
+    const transactionCollection = collection(userDocRef, 'transactions');
+
+    // Retrieve all documents from the 'transactions' subcollection
+    const querySnapshot = await getDocs(transactionCollection);
+
+    // Initialize an empty array to store the user's transactions
+    const transactions = [];
+
+    // Loop through the documents in the query snapshot
+    querySnapshot.forEach((doc) => {
+      // Get the data for each transaction
+      const transactionData = doc.data();
+
+      // Add the transaction data to the array
+      transactions.push(transactionData);
+    });
+
+    // Return the array of transactions
+    return transactions;
+  } catch (error) {
+    console.error('Error retrieving transaction history for user:', error);
+    throw error; // Handle the error as needed in your component
+  }
+};
+

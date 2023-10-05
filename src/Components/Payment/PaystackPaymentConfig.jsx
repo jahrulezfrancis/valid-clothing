@@ -11,7 +11,6 @@ const PayStackPaymentHandler = ({ email, amount }) => {
 
     const API_KEY = process.env.REACT_APP_PAYSTACK_PUB_KEY
 
-    console.log(API_KEY)
     const dispatch = useDispatch()
 
     const config = {

@@ -8,7 +8,6 @@ import { setCategories } from "../../Store/Categories/categories.slice";
 
 const ShopPage = () => {
     const dispatch = useDispatch()
-    console.log(process.env.REACT_APP_PAYSTACK_PUB_KEY)
 
     useEffect(() => {
         const getCategoriesMap = async () => {

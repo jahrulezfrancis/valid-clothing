@@ -6,6 +6,7 @@ import { selectCartItems, selectCartTotal } from "../../Store/Cart/cart.selector
 import PaymentForm from "../../Payment-form/Payment-form.component";
 import PayStackPaymentHandler from "../../Payment/PaystackPaymentConfig";
 import { selectCurrentUser } from "../../Store/user/userSelector";
+import FlutterwavePaymentHandler from "../../Utils/Flutterwave/FlutterwaveConfig";
 
 
 const CheckoutPage = () => {
@@ -67,6 +68,7 @@ const CheckoutPage = () => {
             </TableContainer>
             {cartItems.length > 0 &&
                 <div style={{ textAlign: "center" }}>
+                   <FlutterwavePaymentHandler name={currentUser.displayName} email={currentUser.email} amount={totalPrice} />
                     <h4>We have two payment methods, Choose the one that is best for you: </h4>
                     <PayStackPaymentHandler email={currentUser.email} amount={totalPrice} />
                     or

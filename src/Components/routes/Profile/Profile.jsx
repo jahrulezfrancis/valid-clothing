@@ -1,7 +1,13 @@
 export default function ProfilePage() {
     return (
         <div>
-            This is your setting page you know what I mean
+            <div className="picture-section">
+
+            </div>
+            <hr />
+            <div className="profile-body">
+
+            </div>
         </div>
     )
 }

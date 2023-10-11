@@ -20,17 +20,12 @@ const PayStackPaymentHandler = ({ email, amount }) => {
         publicKey: API_KEY,
     };
 
-    // you can call this function anything
     const onSuccess = (reference) => {
-
-        // Implementation for whatever you want to do with reference and after success call.
         console.log(reference);
         dispatch(emptyCart([]))
     };
 
-    // you can call this function anything
     const onClose = () => {
-        // implementation for  whatever you want to do when the Paystack dialog closed.
         console.log("closed");
     };
     const initializePayment = usePaystackPayment(config);
@@ -43,7 +38,7 @@ const PayStackPaymentHandler = ({ email, amount }) => {
         <div>
             <TopPaymentFormContainer>
                 <h3>Checkout with Paystack</h3>
-                <BaseButton onClick={handlePayment} >Pay with Paystack</BaseButton>
+                <BaseButton onClick={handlePayment}>Pay with Paystack</BaseButton>
             </TopPaymentFormContainer>
         </div>
     );

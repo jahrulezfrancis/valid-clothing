@@ -4,6 +4,7 @@ import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
 import { setTransactionHistory, } from "../../Store/Payment/transactionSlice";
 import { addNewTransactionHistory } from "../Firebase/firebase.utils";
 import { emptyCart } from "../../Store/Cart/cart.slice";
+import "./flutterwave.styles.css"
 
 export default function FlutterwavePaymentHandler({
   email,
@@ -36,6 +37,7 @@ export default function FlutterwavePaymentHandler({
     ...config,
     text: "Pay with Flutterwave!",
     callback: (response) => {
+    console.log(response)
       addNewTransactionHistory({ flutterwaveData: response })
       dispatch(setTransactionHistory(response));
       dispatch(emptyCart([]))

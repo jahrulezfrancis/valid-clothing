@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
 import { setTransactionHistory, } from "../../Store/Payment/transactionSlice";
-import { addNewTransactionHistory } from "../Firebase/firebase.utils";
+import { addNewTransactionHistory } from "../../Utils/Firebase/firebase.utils";
 import { emptyCart } from "../../Store/Cart/cart.slice";
 import "./flutterwave.styles.css"
 

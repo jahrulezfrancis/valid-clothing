@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { usePaystackPayment } from "react-paystack";
-import { emptyCart } from "../Store/Cart/cart.slice";
-import { TopPaymentFormContainer } from "../Payment-form/Payment-form.styles";
+import { emptyCart } from "../../Store/Cart/cart.slice";
+import { TopPaymentFormContainer } from "../Stripe/Payment-form.styles";
 import { useDispatch } from "react-redux";
 
 

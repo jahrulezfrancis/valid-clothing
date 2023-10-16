@@ -3,10 +3,10 @@ import { addItemToCart, removeItemFromCart, clearItemFromCart, } from "../../Sto
 import { CartTable, TableData, RemoveButton, ButtonContainer, EmptyCartContainer, QuantityButton, TableHead, QuantityLabel, TableContainer } from "./checkout.style"
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems, selectCartTotal } from "../../Store/Cart/cart.selector";
-import PaymentForm from "../../Payment-form/Payment-form.component";
-import PayStackPaymentHandler from "../../Payment/PaystackPaymentConfig";
+import PayStackPaymentHandler from "../../Payment/Paystack/PaystackPaymentConfig";
+import FlutterwavePaymentHandler from "../../Payment/FlutterWave/FlutterwaveConfig";
+import StripePaymentForm from "../../Payment/Stripe/Payment-form.component";
 import { selectCurrentUser } from "../../Store/user/userSelector";
-import FlutterwavePaymentHandler from "../../Utils/Flutterwave/FlutterwaveConfig";
 
 
 const CheckoutPage = () => {
@@ -72,7 +72,7 @@ const CheckoutPage = () => {
                     <h4>We have two payment methods, Choose the one that is best for you: </h4>
                     <PayStackPaymentHandler email={currentUser.email} amount={totalPrice} />
                     or
-                    <PaymentForm />
+                    <StripePaymentForm />
                 </div>}
         </>
     )

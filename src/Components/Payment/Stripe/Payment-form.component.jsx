@@ -25,11 +25,14 @@ const StripePaymentForm = () => {
   const handlePayment = async (e) => {
     e.preventDefault();
 
+    const dollarRate = 900
+
+    const convertedAmount = amount * dollarRate
+
     if (!stripe || !elements) {
       return;
     }
     setProcessingPayment(true);
-
     try {
       const response = await fetch(
         "/.netlify/functions/create-payment-intent",
@@ -38,7 +41,7 @@ const StripePaymentForm = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ amount: amount * 100 }),
+          body: JSON.stringify({ amount: convertedAmount * 100 }),
         }
       );
       const data = await response.json();

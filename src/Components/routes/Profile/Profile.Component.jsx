@@ -1,33 +1,46 @@
-import { useSelector } from "react-redux"
-import { selectCurrentUser } from "../../Store/user/userSelector"
-import { useState } from "react"
-import { ProfileHeader } from "./Profile.styles"
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../Store/user/userSelector";
+import {
+  ProfileBody,
+  ProfileContainer,
+  ProfileImage,
+  PictureSection,
+  ClassicHeading,
+} from "./Profile.styles";
+import TransactionHistoryTable from "../../TransactionHistory/TransactionHistoy.component";
 
 export default function ProfilePage() {
-    const currentUser = useSelector(selectCurrentUser)
-    const [loaduser, setLoaduser] = useState(false)
+  const currentUser = useSelector(selectCurrentUser);
+  const [loadUser, setLoadUser] = useState(false);
 
+  useEffect(() => {
     setTimeout(() => {
-        setLoaduser(true)
-    }, 1000)
-    return (loaduser &&
-        <div>
-            <div className="picture-section">
-            </div>
-            <hr />
-            <div className="profile-body">
-                <ProfileHeader>
-                    <div className="profile-image-container">
-                        <img src={currentUser.photoURL} alt={currentUser.displayName} />
-                    </div>
-                    <h4>{currentUser.displayName}</h4>
-                </ProfileHeader>
-                <h5>Name: {currentUser.displayName}</h5>
-                <h5>Email: {currentUser.email}</h5>
-                <h5>Phone Number: {currentUser.phoneNumber}</h5>
-            </div>
-            <h2>Your Purchase history</h2>
-            {/* Implement transaction history table here */}
-        </div>
-    )
+      setLoadUser(true);
+    }, 1000);
+  }, []);
+
+  return (
+    <ProfileContainer>
+      {loadUser && (
+        <>
+          <PictureSection>
+            <ProfileImage
+              src={currentUser.photoURL}
+              alt={currentUser.displayName}
+            />
+            <ClassicHeading>{currentUser.displayName}</ClassicHeading>
+          </PictureSection>
+          <hr />
+          <ProfileBody>
+            <h5>Name: {currentUser.displayName}</h5>
+            <h5>Email: {currentUser.email}</h5>
+            <h5>Phone Number: {currentUser.phoneNumber}</h5>
+          </ProfileBody>
+          <h2>Your Purchase history</h2>
+          <TransactionHistoryTable />
+        </>
+      )}
+    </ProfileContainer>
+  );
 }

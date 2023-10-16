@@ -24,7 +24,7 @@ const showToast = (message, type) => {
 const Toast = () => {
   return (
     <div>
-      <ToastContainer autoClose={4000} hideProgressBar />
+      <ToastContainer theme='light' autoClose={3000} hideProgressBar />
     </div>
   );
 };

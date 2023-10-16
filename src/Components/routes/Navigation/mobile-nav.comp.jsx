@@ -10,7 +10,7 @@ import CartIcon from "../../Cart-Icon/cart-icon.component";
 import { selectCurrentUser } from "../../Store/user/userSelector";
 import { signOutUser } from "../../Utils/Firebase/firebase.utils";
 import { FiMenu } from "react-icons/fi";
-import {MdMenuOpen} from "react-icons/md"
+import { MdMenuOpen } from "react-icons/md"
 
 
 
@@ -22,14 +22,14 @@ const HamburgerMenu = () => {
 
     return (
         <Wrapper>
-            <Menu menuButton={({ open }) => <ButtonContainer>{open ? <MdMenuOpen/> : <FiMenu />}</ButtonContainer> }>
+            <Menu menuButton={({ open }) => <ButtonContainer>{open ? <MdMenuOpen /> : <FiMenu />}</ButtonContainer>}>
                 <MenuItem><Navlink to='/'>Home</Navlink></MenuItem>
                 <MenuDivider />
                 <MenuItem><Navlink to='/shop'>Shop</Navlink></MenuItem>
                 <MenuDivider />
                 <MenuItem>
                     {currentUser ? (
-                        <Navlink onClick={signOutUser}>Sign out</Navlink>
+                        <Navlink to='profile'>Profile</Navlink>
                     ) : (
                         <Navlink to="auth">Sign in</Navlink>
                     )}

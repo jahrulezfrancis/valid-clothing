@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { CardElement } from "@stripe/react-stripe-js";
-import Button from "../Button/buttton.component";
+import Button from "../../Button/buttton.component";
 
 export const TopPaymentFormContainer = styled.div`
     display: flex;

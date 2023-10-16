@@ -15,7 +15,7 @@ export const CategoryContainer = styled.div`
     grid-template-columns: repeat(2, 1fr); 
     padding: 10px 25px;
   }
-`;
+`
 
 export const CategoryTitle = styled.h2`
   text-align: center;
@@ -26,4 +26,4 @@ export const CategoryTitle = styled.h2`
   @media (max-width: 768px) {
     font-size: 24px; // Adjust font size for smaller screens
   }
-`;
+`

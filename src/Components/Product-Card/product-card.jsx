@@ -34,8 +34,10 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    min-height: 420px;
     height: auto;
     align-items: center;
+    justify-content: start;
     padding: 18px;
     border-radius: 8px;
     box-shadow: -1px 2px 14px 4px rgba(185,185,185,0.75);

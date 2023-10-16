@@ -25,7 +25,7 @@ export const CartTable = styled.table`
 `;
 
 export const TableContainer = styled.div`
-  overflow-x: auto; /* Add horizontal scroll on smaller screens */
+  overflow-x: auto;
   margin-top: 20px;
   max-width: 100%;
 `;

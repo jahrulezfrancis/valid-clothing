@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const TableWrapper = styled.div`
   width: 100%;
@@ -35,6 +35,6 @@ export const TableHeaderCell = styled.th`
 `;
 
 export const TableCell = styled.td`
+  text-align: center;
   padding: 10px;
 `;
-

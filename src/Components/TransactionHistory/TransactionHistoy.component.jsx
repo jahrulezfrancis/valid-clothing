@@ -1,31 +1,44 @@
-import { TableCell, TableBody, TableHead, TableHeaderCell, TableWrapper, TableRow, StyledTable} from "./TransactionHistory.styles";
+import EmptyTransactions from "./EmptyTransactions";
+import {
+  TableCell,
+  TableBody,
+  TableHead,
+  TableHeaderCell,
+  TableWrapper,
+  TableRow,
+  StyledTable,
+} from "./TransactionHistory.styles";
+import { randomTransactions } from "./transactions";
 
-
-const TransactionHistoryTable = ({ transactions }) => {
+const TransactionHistoryTable = () => {
   return (
     <TableWrapper>
       <StyledTable>
         <TableHead>
           <tr>
-            <TableHeaderCell>tx_ref</TableHeaderCell>
-            <TableHeaderCell>amount</TableHeaderCell>
-            <TableHeaderCell>currency</TableHeaderCell>
-            <TableHeaderCell>email</TableHeaderCell>
-            <TableHeaderCell>phone_number</TableHeaderCell>
-            <TableHeaderCell>name</TableHeaderCell>
+            <TableHeaderCell>Amount</TableHeaderCell>
+            <TableHeaderCell>Currency</TableHeaderCell>
+            <TableHeaderCell>Email</TableHeaderCell>
+            <TableHeaderCell>Status</TableHeaderCell>
+            <TableHeaderCell>Transaction Reference</TableHeaderCell>
           </tr>
         </TableHead>
         <TableBody>
-          {transactions.map((transaction, index) => (
-            <TableRow key={index}>
-              <TableCell>{transaction.amount}</TableCell>
-              <TableCell>{transaction.name}</TableCell>
-              <TableCell>{transaction.currency}</TableCell>
-              <TableCell>{transaction.email}</TableCell>
-              <TableCell>{transaction.tx_ref}</TableCell>
-              {/* <TableCell>{transaction.phone_number}</TableCell> */}
+          {randomTransactions.length > 0 ? (
+            randomTransactions.map((transaction, index) => (
+              <TableRow key={index}>
+                <TableCell>₦{transaction.amount}</TableCell>
+                <TableCell>{transaction.currency}</TableCell>
+                <TableCell>{transaction.email}</TableCell>
+                <TableCell>Successful</TableCell>
+                <TableCell>{transaction.tx_ref}</TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <EmptyTransactions />
             </TableRow>
-          ))}
+          )}
         </TableBody>
       </StyledTable>
     </TableWrapper>

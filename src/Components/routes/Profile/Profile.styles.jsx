@@ -8,8 +8,7 @@ export const ProfileContainer = styled.div`
 export const PictureSection = styled.div`
   height: 200px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   padding: 20px;
   background-color: #6c63ff;
 `;
@@ -31,4 +30,11 @@ export const ClassicHeading = styled.h2`
   background-clip: text;
   -webkit-background-clip: text;
   color: white;
+`;
+
+export const FlexContainer = styled.section`
+  display: flex;
+  width: 100vw;
+  justify-content: ${(props) => props.justify};
+  align-items: ${(props) => props.align};
 `;

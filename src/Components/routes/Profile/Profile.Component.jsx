@@ -9,27 +9,47 @@ import {
   ClassicHeading,
 } from "./Profile.styles";
 import TransactionHistoryTable from "../../TransactionHistory/TransactionHistoy.component";
+import { FaPowerOff } from "react-icons/fa";
+import { signOutUser } from "../../Utils/Firebase/firebase.utils";
+import { useNavigate, Navigate } from "react-router-dom";
 
 export default function ProfilePage() {
   const currentUser = useSelector(selectCurrentUser);
   const [loadUser, setLoadUser] = useState(false);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     setTimeout(() => {
       setLoadUser(true);
     }, 1000);
   }, []);
 
+  function handleLogout() {
+    signOutUser();
+    navigate("/auth");
+  }
+
   return (
+    currentUser ? 
     <ProfileContainer>
       {loadUser && (
         <>
           <PictureSection>
-            <ProfileImage
-              src={currentUser.photoURL}
-              alt={currentUser.displayName}
+            <div
+              style={{ display: "flex", flexDirection: "column", width: "50%" }}
+            >
+              <ProfileImage
+                src={currentUser.photoURL}
+                alt={currentUser.displayName}
+              />
+              <ClassicHeading>{currentUser.displayName}</ClassicHeading>
+            </div>
+            <FaPowerOff
+              style={{ cursor: "pointer" }}
+              onClick={handleLogout}
+              fontSize={30}
+              color="red"
             />
-            <ClassicHeading>{currentUser.displayName}</ClassicHeading>
           </PictureSection>
           <hr />
           <ProfileBody>
@@ -41,6 +61,7 @@ export default function ProfilePage() {
           <TransactionHistoryTable />
         </>
       )}
-    </ProfileContainer>
+    </ProfileContainer> :
+    <Navigate to="/auth" replace="true"/>
   );
 }

@@ -48,7 +48,6 @@ export default function FlutterwavePaymentHandler({
 
   return (
     <div>
-      <h1>Checkout with Flutterwave</h1>
       <FlutterWaveButton className="checkout-button" {...fwConfig} />
     </div>
   );

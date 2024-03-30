@@ -94,8 +94,16 @@ const transactionRef = collection(db, 'transactions')
 
 
 // Function to upload Flutterwave transaction data to Firestore
-export const addNewTransactionHistory = async ({flutterwaveData}) => {
+export const addNewTransactionHistory = async ({ flutterwaveData, userId }) => {
   try {
+
+    const purchasedItems = [
+      { itemName: "Jeans", amount: 2000, quantity: 3 },
+      { itemName: "Jacket", amount: 2600, quantity: 3 },
+      { itemName: "Sneakers", amount: 5500, quantity: 3 },
+      { itemName: "Break", amount: 8700, quantity: 3 }
+    ]
+
 
     const {
       amount,
@@ -110,10 +118,12 @@ export const addNewTransactionHistory = async ({flutterwaveData}) => {
       amount,
       email,
       name,
-      created_at: new Date(), 
-      transaction_id: flw_ref, 
+      created_at: new Date(),
+      transaction_id: flw_ref,
       status,
       tx_ref,
+      purchasedItems,
+      userId,
     };
 
     // Add the transaction data to Firestore
@@ -130,10 +140,10 @@ export const addNewTransactionHistory = async ({flutterwaveData}) => {
 export const fetchTransactionHistory = async (userId) => {
   try {
     // Get a reference to the Firestore user document
-    const userDocRef = doc(db, 'users', userId);
+    // const userDocRef = doc(db, 'users', userId);
 
     // Create a reference to the 'transactions' subcollection
-    const transactionCollection = collection(userDocRef, 'transactions');
+    const transactionCollection = collection(db, 'transactions');
 
     // Retrieve all documents from the 'transactions' subcollection
     const querySnapshot = await getDocs(transactionCollection);
@@ -145,6 +155,9 @@ export const fetchTransactionHistory = async (userId) => {
     querySnapshot.forEach((doc) => {
       // Get the data for each transaction
       const transactionData = doc.data();
+
+      const currentUserTrans = transactions.filter((item) => item.uid === userId)
+      console.log(currentUserTrans)
 
       // Add the transaction data to the array
       transactions.push(transactionData);

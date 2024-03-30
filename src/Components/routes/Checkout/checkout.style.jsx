@@ -67,3 +67,11 @@ export const RemoveButton = styled.button`
     background-color: #d32f2f;
   }
 `;
+
+export const PaymentButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+`

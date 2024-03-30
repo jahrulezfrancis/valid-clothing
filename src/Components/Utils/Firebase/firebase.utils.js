@@ -89,22 +89,14 @@ export const onAuthStateChangedListener = (callBack) => {
 
 //Methods to handle and or manage transaction history from database
 
-const transactionRef = collection(db, 'transactions')
 
 
 
 // Function to upload Flutterwave transaction data to Firestore
-export const addNewTransactionHistory = async ({ flutterwaveData, userId }) => {
+export const addNewTransactionHistory = async ({ flutterwaveData, userId, purchasedItems }) => {
+  const transactionRef = collection(db, 'transactions')
+
   try {
-
-    const purchasedItems = [
-      { itemName: "Jeans", amount: 2000, quantity: 3 },
-      { itemName: "Jacket", amount: 2600, quantity: 3 },
-      { itemName: "Sneakers", amount: 5500, quantity: 3 },
-      { itemName: "Break", amount: 8700, quantity: 3 }
-    ]
-
-
     const {
       amount,
       customer: { email, name },
@@ -139,8 +131,6 @@ export const addNewTransactionHistory = async ({ flutterwaveData, userId }) => {
 // Function to retrieve transaction history for a specific user from Firestore
 export const fetchTransactionHistory = async (userId) => {
   try {
-    // Get a reference to the Firestore user document
-    // const userDocRef = doc(db, 'users', userId);
 
     // Create a reference to the 'transactions' subcollection
     const transactionCollection = collection(db, 'transactions');
@@ -156,11 +146,11 @@ export const fetchTransactionHistory = async (userId) => {
       // Get the data for each transaction
       const transactionData = doc.data();
 
-      const currentUserTrans = transactions.filter((item) => item.uid === userId)
-      console.log(currentUserTrans)
-
-      // Add the transaction data to the array
-      transactions.push(transactionData);
+      // Check if the transaction belongs to the current user
+      if (transactionData.userId === userId) {
+        // Add the transaction data to the array
+        transactions.push(transactionData);
+      }
     });
 
     // Return the array of transactions
@@ -169,5 +159,6 @@ export const fetchTransactionHistory = async (userId) => {
     console.error('Error retrieving transaction history for user:', error);
     throw error; // Handle the error as needed in your component
   }
+
 };
 

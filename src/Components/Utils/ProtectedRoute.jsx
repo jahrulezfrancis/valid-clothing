@@ -8,7 +8,7 @@ export function ProtectedRoute({ children }) {
     const location = useLocation();
 
     if (currentUser === null) {
-        return <Navigate to="/sign-in" state={{ from: location }} replace />;
+        return <Navigate to="/auth" state={{ from: location }} replace />;
     }
     return children;
 }

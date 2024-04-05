@@ -14,6 +14,7 @@ import Authentication from "./Components/routes/Authentication/authentication.co
 import ShopPage from "./Components/routes/Shop/shop.component";
 import CheckoutPage from "./Components/routes/Checkout/checkout.component";
 import { useDispatch } from "react-redux";
+import { ProtectedRoute } from "./Components/Utils/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,9 +35,20 @@ function App() {
         <Route path="/" element={<NavBar />}>
           <Route index element={<Home />} />
           <Route path="shop/*" element={<ShopPage />} />
-          <Route path="profile" element={<ProfilePage />} />
+
+          <Route path="profile" element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          } />
+
+          <Route path="checkout" element={
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          } />
+
           <Route path={"auth"} element={<Authentication />} />
-          <Route path="checkout" element={<CheckoutPage />} />
         </Route>
       </Routes>
     </div>

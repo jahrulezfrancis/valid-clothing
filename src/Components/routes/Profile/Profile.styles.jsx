@@ -38,3 +38,11 @@ export const FlexContainer = styled.section`
   justify-content: ${(props) => props.justify};
   align-items: ${(props) => props.align};
 `;
+
+export const CustomInput = styled.input`
+  display: flex;
+  width: 150px;
+  height: 40px;
+  border-radius: 8px;
+  border: 0.1px solid grey;
+`

@@ -8,7 +8,8 @@ const defaultFormFields = {
     displayName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    phoneNumber: ''
 }
 
 const SignUpForm = () => {

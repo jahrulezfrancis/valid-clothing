@@ -12,9 +12,12 @@ import TransactionHistoryTable from "../../TransactionHistory/TransactionHistoy.
 import { FaPowerOff } from "react-icons/fa";
 import { signOutUser } from "../../Utils/Firebase/firebase.utils";
 import { useNavigate, Navigate } from "react-router-dom";
+import FormInput from "../../Input/form-input.component";
+import Button from "../../Button/buttton.component";
 
 export default function ProfilePage() {
   const currentUser = useSelector(selectCurrentUser);
+  const [editMode, setEditMode] = useState(false)
   const [loadUser, setLoadUser] = useState(false);
   const navigate = useNavigate();
 
@@ -27,6 +30,10 @@ export default function ProfilePage() {
   function handleLogout() {
     signOutUser();
     navigate("/auth");
+  }
+
+  function handleProfileUpdate() {
+    console.log("Profile update is in progress")
   }
 
   return (
@@ -53,9 +60,14 @@ export default function ProfilePage() {
             </PictureSection>
             <hr />
             <ProfileBody>
-              <h5>Name: {currentUser.displayName !== null ? currentUser.displayName : "Not provided, kindly update your profile"}</h5>
+              {editMode ? <FormInput label="Display name" type="text" /> :
+                <h5>Name: {currentUser.displayName !== null ? currentUser.displayName : "Not provided, kindly update your profile"}</h5>
+              }
               <h5>Email: {currentUser.email}</h5>
-              <h5>Phone Number: {currentUser.phoneNumber !== null ? currentUser.phoneNumber : "Not provided, kindly update your profile"}</h5>
+              {editMode ? <FormInput label="Phone Number" type="text" /> :
+                <h5>Phone Number: {currentUser.phoneNumber !== null ? currentUser.phoneNumber : "Not provided, kindly update your profile"}</h5>
+              }
+              {editMode ? <Button onClick={handleProfileUpdate}>Save</Button> : <Button onClick={setEditMode}>Edit profile</Button>}
             </ProfileBody>
             <h2>Your Purchase history</h2>
             <TransactionHistoryTable />

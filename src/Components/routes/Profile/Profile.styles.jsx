@@ -39,10 +39,17 @@ export const FlexContainer = styled.section`
   align-items: ${(props) => props.align};
 `;
 
+export const FluidContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+`
+
 export const CustomInput = styled.input`
   display: flex;
   width: 150px;
-  height: 40px;
+  height: 30px;
   border-radius: 8px;
   border: 0.1px solid grey;
 `

@@ -8,6 +8,7 @@ import {
   PictureSection,
   ClassicHeading,
   CustomInput,
+  FluidContainer,
 } from "./Profile.styles";
 import TransactionHistoryTable from "../../TransactionHistory/TransactionHistoy.component";
 import { FaPowerOff } from "react-icons/fa";
@@ -35,6 +36,7 @@ export default function ProfilePage() {
 
   function handleProfileUpdate() {
     console.log("Profile update is in progress " + profileImage)
+    setEditMode(false)
   }
 
   return (
@@ -70,14 +72,14 @@ export default function ProfilePage() {
             </PictureSection>
             <hr />
             <ProfileBody>
-              {editMode ? <CustomInput label="Display name" type="text" /> :
+              {editMode ? <FluidContainer>Name: <CustomInput label="Display name" type="text" /> </FluidContainer> :
                 <h5>Name: {currentUser.displayName !== null ? currentUser.displayName : "Not provided, kindly update your profile"}</h5>
               }
               <h5>Email: {currentUser.email}</h5>
-              {editMode ? <CustomInput maxLength={11} label="Phone Number" type="text" /> :
+              {editMode ? <FluidContainer>Phone number: <CustomInput maxLength={11} label="Phone Number" type="text" /> </FluidContainer> :
                 <h5>Phone Number: {currentUser.phoneNumber !== null ? currentUser.phoneNumber : "Not provided, kindly update your profile"}</h5>
               }
-              {editMode ? <Button onClick={handleProfileUpdate}>Save</Button> : <Button onClick={setEditMode}>Edit profile</Button>}
+              {editMode ? <Button style={{marginTop: "20px"}} onClick={handleProfileUpdate}>Save</Button> : <Button onClick={setEditMode}>Edit profile</Button>}
             </ProfileBody>
             <h2>Your Purchase history</h2>
             <TransactionHistoryTable />

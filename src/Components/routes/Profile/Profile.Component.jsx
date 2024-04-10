@@ -7,18 +7,19 @@ import {
   ProfileImage,
   PictureSection,
   ClassicHeading,
+  CustomInput,
 } from "./Profile.styles";
 import TransactionHistoryTable from "../../TransactionHistory/TransactionHistoy.component";
 import { FaPowerOff } from "react-icons/fa";
 import { signOutUser } from "../../Utils/Firebase/firebase.utils";
 import { useNavigate, Navigate } from "react-router-dom";
-import FormInput from "../../Input/form-input.component";
 import Button from "../../Button/buttton.component";
 
 export default function ProfilePage() {
   const currentUser = useSelector(selectCurrentUser);
   const [editMode, setEditMode] = useState(false)
   const [loadUser, setLoadUser] = useState(false);
+  const [profileImage, setProfileImage] = useState()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +34,7 @@ export default function ProfilePage() {
   }
 
   function handleProfileUpdate() {
-    console.log("Profile update is in progress")
+    console.log("Profile update is in progress " + profileImage)
   }
 
   return (
@@ -45,10 +46,19 @@ export default function ProfilePage() {
               <div
                 style={{ display: "flex", flexDirection: "column", width: "50%" }}
               >
-                <ProfileImage
-                  src={currentUser.photoURL}
-                  alt={currentUser.displayName}
-                />
+                {
+                  currentUser.photoURL !== null ?
+                    <ProfileImage
+                      src={currentUser.photoURL}
+                      alt={currentUser.displayName}
+                    />
+                    :
+                    <div style={{ display: "flex", width: "150px", height: "150px", flexDirection: "column" }}>
+                      <h4>Upload your profile picture</h4>
+                      <input style={{ paddingBottom: "10px" }} onChange={(e) => setProfileImage(e.target.files)} type="image" accept="*" name="profilePicture" alt={currentUser.emil} />
+                      <Button>Update</Button>
+                    </div>
+                }
                 <ClassicHeading>{currentUser.displayName}</ClassicHeading>
               </div>
               <FaPowerOff
@@ -60,11 +70,11 @@ export default function ProfilePage() {
             </PictureSection>
             <hr />
             <ProfileBody>
-              {editMode ? <FormInput label="Display name" type="text" /> :
+              {editMode ? <CustomInput label="Display name" type="text" /> :
                 <h5>Name: {currentUser.displayName !== null ? currentUser.displayName : "Not provided, kindly update your profile"}</h5>
               }
               <h5>Email: {currentUser.email}</h5>
-              {editMode ? <FormInput label="Phone Number" type="text" /> :
+              {editMode ? <CustomInput maxLength={11} label="Phone Number" type="text" /> :
                 <h5>Phone Number: {currentUser.phoneNumber !== null ? currentUser.phoneNumber : "Not provided, kindly update your profile"}</h5>
               }
               {editMode ? <Button onClick={handleProfileUpdate}>Save</Button> : <Button onClick={setEditMode}>Edit profile</Button>}

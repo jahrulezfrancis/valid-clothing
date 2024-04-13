@@ -1,16 +1,11 @@
 import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
+  display: grid;
+  grid-template-columns: 350px 2fr;
+  gap: 50px;
   padding: 20px;
   background-color: #f8f8f8;
-`;
-
-export const PictureSection = styled.div`
-  height: 200px;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  background-color: #6c63ff;
 `;
 
 export const ProfileBody = styled.div`
@@ -23,6 +18,7 @@ export const ProfileBody = styled.div`
 export const ProfileImage = styled.img`
   max-width: 100px;
   border-radius: 50%;
+  align-self: center;
 `;
 
 export const ClassicHeading = styled.h2`
@@ -54,4 +50,17 @@ export const CustomInput = styled.input`
   height: 30px;
   border-radius: 8px;
   border: 0.1px solid grey;
+`
+
+export const LeftSidebar = styled.div`
+  display: flex;
+  flex-direction: column;
+  // width: 100%;
+  padding: 20px;
+  justify-content: center;
+  border-radius: 8px;
+  overflow-x: hidden;
+  height: auto;
+  background-color: #E7E7E7;
+  min-height: 100vh;
 `

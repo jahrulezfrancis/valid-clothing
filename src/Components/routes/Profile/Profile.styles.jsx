@@ -42,8 +42,10 @@ export const FlexContainer = styled.section`
 export const FluidContainer = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
-  gap: 20px;
+  justify-content: space-between;
+  line-height: 20px;
+  column-gap: 30px;
+  width: 300px;
 `
 
 export const CustomInput = styled.input`

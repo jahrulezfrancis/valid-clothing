@@ -89,14 +89,14 @@ export const onAuthStateChangedListener = (callBack) => {
 
 //Methods to handle and or manage transaction history from database
 
-const transactionRef = collection(db, 'transactions')
 
 
 
 // Function to upload Flutterwave transaction data to Firestore
-export const addNewTransactionHistory = async ({flutterwaveData}) => {
-  try {
+export const addNewTransactionHistory = async ({ flutterwaveData, userId, purchasedItems }) => {
+  const transactionRef = collection(db, 'transactions')
 
+  try {
     const {
       amount,
       customer: { email, name },
@@ -110,10 +110,12 @@ export const addNewTransactionHistory = async ({flutterwaveData}) => {
       amount,
       email,
       name,
-      created_at: new Date(), 
-      transaction_id: flw_ref, 
+      created_at: new Date(),
+      transaction_id: flw_ref,
       status,
       tx_ref,
+      purchasedItems,
+      userId,
     };
 
     // Add the transaction data to Firestore
@@ -129,11 +131,9 @@ export const addNewTransactionHistory = async ({flutterwaveData}) => {
 // Function to retrieve transaction history for a specific user from Firestore
 export const fetchTransactionHistory = async (userId) => {
   try {
-    // Get a reference to the Firestore user document
-    const userDocRef = doc(db, 'users', userId);
 
     // Create a reference to the 'transactions' subcollection
-    const transactionCollection = collection(userDocRef, 'transactions');
+    const transactionCollection = collection(db, 'transactions');
 
     // Retrieve all documents from the 'transactions' subcollection
     const querySnapshot = await getDocs(transactionCollection);
@@ -146,8 +146,11 @@ export const fetchTransactionHistory = async (userId) => {
       // Get the data for each transaction
       const transactionData = doc.data();
 
-      // Add the transaction data to the array
-      transactions.push(transactionData);
+      // Check if the transaction belongs to the current user
+      if (transactionData.userId === userId) {
+        // Add the transaction data to the array
+        transactions.push(transactionData);
+      }
     });
 
     // Return the array of transactions
@@ -156,5 +159,6 @@ export const fetchTransactionHistory = async (userId) => {
     console.error('Error retrieving transaction history for user:', error);
     throw error; // Handle the error as needed in your component
   }
+
 };
 

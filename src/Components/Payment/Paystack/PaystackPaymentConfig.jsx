@@ -37,7 +37,6 @@ const PayStackPaymentHandler = ({ email, amount }) => {
     return (
         <div>
             <TopPaymentFormContainer>
-                <h3>Checkout with Paystack</h3>
                 <BaseButton onClick={handlePayment}>Pay with Paystack</BaseButton>
             </TopPaymentFormContainer>
         </div>
@@ -54,7 +53,7 @@ const BaseButton = styled.button`
     line-height: 50px;
     padding: 0 35px 0 35px;
     font-size: 15px;
-    background-color: black;
+    background-color: #3BB75E;
     color: white;
     font-weight: bolder;
     border: none;
@@ -65,7 +64,7 @@ const BaseButton = styled.button`
     align-items: center;
 
     &:hover {
-      background-color: #FFFADA;
+      background-color: #287C40;
       color: black;
       border-radius: 7px;
       box-shadow: -2px 4px 16px -2px rgba(75, 146, 230, 0.72);

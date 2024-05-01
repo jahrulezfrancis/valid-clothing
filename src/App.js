@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import {
   createUserDocumentFromAuth,
-  fetchTransactionHistory,
   onAuthStateChangedListener,
 } from "./Components/Utils/Firebase/firebase.utils";
 import {
@@ -14,23 +13,11 @@ import NavBar from "./Components/routes/Navigation/navigation-bar.component";
 import Authentication from "./Components/routes/Authentication/authentication.component";
 import ShopPage from "./Components/routes/Shop/shop.component";
 import CheckoutPage from "./Components/routes/Checkout/checkout.component";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentUser } from "./Components/Store/user/userSelector";
+import { useDispatch } from "react-redux";
+import { ProtectedRoute } from "./Components/Utils/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
-  const currentUser = useSelector(selectCurrentUser);
-  const uID = currentUser ? currentUser.uid : "";
-
-  useEffect(() => {
-    fetchTransactionHistory(uID)
-      .then((transactions) => {
-        console.log(transactions);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [uID]);
 
   useEffect(() => {
     const unSubscribe = onAuthStateChangedListener((user) => {
@@ -48,9 +35,20 @@ function App() {
         <Route path="/" element={<NavBar />}>
           <Route index element={<Home />} />
           <Route path="shop/*" element={<ShopPage />} />
-          <Route path="profile" element={<ProfilePage />} />
+
+          <Route path="profile" element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          } />
+
+          <Route path="checkout" element={
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          } />
+
           <Route path={"auth"} element={<Authentication />} />
-          <Route path="checkout" element={<CheckoutPage />} />
         </Route>
       </Routes>
     </div>

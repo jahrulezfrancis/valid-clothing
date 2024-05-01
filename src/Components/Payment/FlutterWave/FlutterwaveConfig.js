@@ -1,10 +1,12 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
 import { setTransactionHistory, } from "../../Store/Payment/transactionSlice";
 import { addNewTransactionHistory } from "../../Utils/Firebase/firebase.utils";
 import { emptyCart } from "../../Store/Cart/cart.slice";
 import "./flutterwave.styles.css"
+import { selectCurrentUser } from "../../Store/user/userSelector";
+import { selectCartItems } from "../../Store/Cart/cart.selector";
 
 export default function FlutterwavePaymentHandler({
   email,
@@ -32,13 +34,24 @@ export default function FlutterwavePaymentHandler({
     }
   };
   const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems)
+  const [purchasedItems, setPurchasedItems] = useState([])
+
+  useEffect(() => {
+    const itemNames = cartItems !== undefined && cartItems.map((cartItem) => cartItem.name)
+    setPurchasedItems(itemNames)
+    console.log(cartItems)
+    console.log(purchasedItems)
+  }, [cartItems])
+
+  const currentUser = useSelector(selectCurrentUser)
 
   const fwConfig = {
     ...config,
     text: "Pay with Flutterwave!",
     callback: (response) => {
-    console.log(response)
-      addNewTransactionHistory({ flutterwaveData: response })
+      console.log(response)
+      addNewTransactionHistory({ flutterwaveData: response, userId: currentUser.uid, purchasedItems: purchasedItems })
       dispatch(setTransactionHistory(response));
       dispatch(emptyCart([]))
       closePaymentModal();
@@ -48,7 +61,6 @@ export default function FlutterwavePaymentHandler({
 
   return (
     <div>
-      <h1>Checkout with Flutterwave</h1>
       <FlutterWaveButton className="checkout-button" {...fwConfig} />
     </div>
   );

@@ -8,12 +8,13 @@ const defaultFormFields = {
     displayName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    phoneNumber: ''
 }
 
 const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
-    const { displayName, email, password, confirmPassword } = formFields;
+    const { phoneNumber, displayName, email, password, confirmPassword } = formFields;
 
     const clearFormFields = () => {
         setFormFields(defaultFormFields)
@@ -51,6 +52,8 @@ const SignUpForm = () => {
                 <FormInput label='Display Name' onChange={handleChange} required name="displayName" type="text" value={displayName} />
 
                 <FormInput label='Email Address' onChange={handleChange} required name="email" type="email" value={email} />
+
+                <FormInput label='Phone Number' onChange={handleChange} required name="phoneNumber" type="number" value={phoneNumber} />
 
                 <FormInput label='Password' onChange={handleChange} required name="password" type="password" value={password} />
 
